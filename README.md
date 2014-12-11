@@ -1,2 +1,4 @@
-jostler
+Jostler
 =======
+
+Financial mate for everyone.
