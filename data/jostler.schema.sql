@@ -1,64 +1,68 @@
-CREATE TABLE user (
-	id INTEGER PRIMARY KEY,
+BEGIN;
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
 	login VARCHAR(32) UNIQUE NOT NULL,
 	name VARCHAR(64) NOT NULL,
 	email VARCHAR(96) UNIQUE NOT NULL,
 	pass VARCHAR(128) UNIQUE NOT NULL
 );
 
+DROP TABLE IF EXISTS tick CASCADE;
 CREATE TABLE tick (
-	id INTEGER PRIMARY KEY,
-	user_id INTEGER NOT NULL,
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER NOT NULL REFERENCES users (id),
 	title VARCHAR(64) NOT NULL,
-	rest REAL NOT NULL,
-	created DATE,
-	modified DATE,
-	CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES user(id)
+	rest MONEY NOT NULL,
+	created TIMESTAMP,
+	modified TIMESTAMP
 );
 
-CREATE TABLE deal (
-	id INTEGER PRIMARY KEY,
-	tick_id INTEGER NOT NULL,
-	when DATE NOT NULL,			// transaction date/time.
-	cat_id INTEGER NOT NULL,
-	amount REAL NOT NULL,
-	cy_id INTEGER NOT NULL, 	// currency.
-	comment VARCHAR(128) NOT NULL,
-	aux VARCHAR(16),			// auxiliary field for different purpose
-	CONSTRAINT FK_tick FOREIGN KEY (tick_id) REFERENCES tick(id),
-	CONSTRAINT FK_cat FOREIGN KEY (cat_id) REFERENCES cat(id),
-	CONSTRAINT FK_cy FOREIGN KEY (cy_id) REFERENCES cy(id)
+DROP TABLE IF EXISTS deal_type CASCADE;
+CREATE TABLE deal_type (
+	id SERIAL PRIMARY KEY,
+	title VARCHAR(32) UNIQUE NOT NULL
 );
 
+DROP TABLE IF EXISTS cat CASCADE;
+CREATE TABLE cat (
+	id SERIAL PRIMARY KEY,
+	title VARCHAR(64) NOT NULL,
+	parent_id INTEGER REFERENCES cat(id),
+	deal_type_id INTEGER NOT NULL  REFERENCES deal_type(id) -- transaction type: income, outcome, transfer
+);
+
+DROP TABLE IF EXISTS cy CASCADE;
 CREATE TABLE cy (
-	id INTEGER PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	abbr VARCHAR(3) UNIQUE NOT NULL,
 	logo VARCHAR(64) UNIQUE NOT NULL
 );
 
+DROP TABLE IF EXISTS deal CASCADE;
+CREATE TABLE deal (
+	id SERIAL PRIMARY KEY,
+	tick_id INTEGER NOT NULL REFERENCES tick (id),
+	date_time TIMESTAMP NOT NULL,				-- transaction date/time.
+	cat_id INTEGER NOT NULL REFERENCES cat (id),
+	amount MONEY NOT NULL,
+	cy_id INTEGER NOT NULL REFERENCES cy (id), 	-- currency.
+	comment VARCHAR(128) NOT NULL,
+	aux VARCHAR(16)								-- auxiliary field for different purpose
+
+);
+
+DROP TABLE IF EXISTS tag CASCADE;
 CREATE TABLE tag(
-	id INTEGER PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	title VARCHAR(48) UNIQUE NOT NULL
 );
 
+DROP TABLE IF EXISTS deal_tag_junction CASCADE;
 CREATE TABLE deal_tag_junction (
-	deal_id INTEGER,
-	tag_id INTEGER,
-	CONSTRAINT deal_tag_pk PRIMARY KEY (deal_id, tag_id),
-	CONSTRAINT FK_deal FOREIGN KEY (deal_id) REFERENCES deal(id),
-	CONSTRAINT FK_tag FOREIGN KEY (tag_id) REFERENCES tag(id)
-)
-
-CREATE TABLE cat (
-	id INTEGER PRIMARY KEY,
-	title VARCHAR(64) NOT NULL,
-	parent_id INTEGER,
-	deal_type_id INTEGER NOT NULL, // transaction type: income, outcome, transfer
-	CONSTRAINT FK_parent_cat FOREIGN KEY (parent_id) REFERENCES cat(id),
-	CONSTRAINT FK_deal_type FOREIGN KEY (deal_type_id) REFERENCES deal_type(id),
+	deal_id INTEGER REFERENCES deal(id),
+	tag_id INTEGER REFERENCES tag(id),
+	PRIMARY KEY (deal_id, tag_id)
 );
 
-CREATE TABLE deal_type (
-	id INTEGER PRIMARY KEY,
-	title VARCHAR(32) UNIQUE NOT NULL
-);
+COMMIT;
