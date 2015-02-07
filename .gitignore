@@ -1,1 +1,4 @@
 jostler
+bower_components/
+**/css/
+**/js/

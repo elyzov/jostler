@@ -1,0 +1,15 @@
+{
+  "name" : "jostler",
+  "version": "0.1",
+  "dependencies" : {
+    "jquery" : "latest",
+    "semantic": "latest",
+    "canjs": "latest"
+  },
+  "install" : {
+    "path" : {
+      "css": "static/css",
+      "js": "static/js"
+    }
+  }
+}

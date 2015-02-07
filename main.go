@@ -1,8 +1,8 @@
 package main
 
 import (
+    "fmt"
 	_ "jostler/routers"
-
 	_ "github.com/lib/pq"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -10,7 +10,10 @@ import (
 
 func init() {
     orm.RegisterDriver("postgres", orm.DR_Postgres)
-    orm.RegisterDataBase("default", "postgres", "jostler:password@/jostler?charset=utf8")
+    err := orm.RegisterDataBase("default", "postgres", "user=jostler password=password dbname=jostler sslmode=disable")
+    if err != nil {
+        fmt.Println(err)
+    }
 }
 
 func main() {

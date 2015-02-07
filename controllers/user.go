@@ -1,40 +1,70 @@
 package controllers
 
 import (
-	"encoding/json"
-	"jostler/models"
-//	"github.com/astaxie/beego"
+  "strconv"
+  "encoding/json"
+  "jostler/models"
 )
 
 
 type UserController struct {
-	baseController
+  restController
 }
 
-// @Title create
-// @Description create user
-// @Param   body        body    models.User   true        "The user options"
-// @Success 200 {string} models.User.Id
-// @Failure 403 body is empty
-// @router / [post]
-func (this *UserController) AddUser() {
-    var user models.User
-    json.Unmarshal(this.Ctx.Input.RequestBody, &user)
-    userid := "12"
-    this.Data["json"] = map[string]string{"UserId": userid}
-    this.ServeJson()
+func (this *UserController) NestPrepare() {
+  this.model = &models.UserModel{}
+  this.model.Prepare()
 }
 
-func (this *UserController) UserInfo() {
-	id := this.Ctx.Input.Param(":id")
-    this.Data["json"] = map[string]string{"UserId": id}
-    this.ServeJson()
-}
 
-func (this *UserController) UserUpdate() {
-//	id := this.Ctx.Input.Param(":id")
-}
+// func (this *UserController) AddUser() {
+//   var user models.User
+//   json.Unmarshal(this.Ctx.Input.RequestBody, &user)
+//   _, err := this.db.Insert(&user)
+//   if err != nil {
+//     this.Response(ERROR, err)
+//   } else {
+//     this.Response(SUCCESS, map[string]interface{}{"user": user})
+//   }
+  
+//   this.ServeJson()
+// }
 
-func (this *UserController) UserDelete() {
-//	id := this.Ctx.Input.Param(":id")
-}
+// func (this *UserController) UserInfo() {
+//   id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
+//   user := models.User{Id: id}
+//   err := this.db.Read(&user)
+//   if err != nil {
+//     this.Response(ERROR, err)
+//   } else {
+//     this.Response(SUCCESS, map[string]interface{}{"user": user})
+//   }
+//   this.ServeJson()
+// }
+
+// func (this *UserController) UserUpdate() {
+//   id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
+//   user := models.User{Id: id}
+//   err := this.db.Read(&user)
+//   if err != nil {
+//     this.Response(ERROR, err)
+//   }
+//   json.Unmarshal(this.Ctx.Input.RequestBody, &user)
+//   if _, err = this.db.Update(&user); err == nil {
+//     this.Response(SUCCESS, map[string]interface{}{"user": user})
+//   } else {
+//     this.Response(ERROR, err)
+//   }
+  
+//   this.ServeJson()
+// }
+
+// func (this *UserController) UserDelete() {
+//   id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
+//   if _, err := this.db.Delete(&models.User{Id: id}); err == nil {
+//     this.Response(SUCCESS, nil)
+//   } else {
+//     this.Response(ERROR, err)
+//   }
+//   this.ServeJson()
+// }
