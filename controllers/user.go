@@ -39,6 +39,7 @@ func (this *UserController) UserInfo() {
   }
   user := models.User{Id: id}
   err = this.db.Read(&user)
+  _, err = this.db.LoadRelated(&user, "Ticks")
   if err != nil {
     this.Response(FAIL, map[string]interface{}{"id": fmt.Sprintf("User with id %v not found", id)})
   } else {

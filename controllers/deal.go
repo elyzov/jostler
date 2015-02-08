@@ -9,11 +9,11 @@ import (
 )
 
 
-type TickController struct {
+type DealController struct {
   baseController
 }
 
-func (this *TickController) AddDeal() {
+func (this *DealController) AddDeal() {
   var tick models.Tick
   err := json.Unmarshal(this.Ctx.Input.RequestBody, &tick)
   if err != nil {
@@ -35,13 +35,13 @@ func (this *TickController) AddDeal() {
   }
 }
 
-func (this *TickController) AllDeals() {
+func (this *DealController) AllDeals() {
   var ticks []*models.Tick
   this.db.QueryTable("tick").Filter("user_id", this.user.Id).All(&ticks);
   this.Response(SUCCESS, map[string]interface{}{"ticks": ticks})
 }
 
-func (this *TickController) DealInfo() {
+func (this *DealController) DealInfo() {
   id, err := strconv.Atoi(this.Ctx.Input.Param(":id"))
   if err != nil {
     this.Response(FAIL, map[string]interface{}{"id": "Must be an integer"})
@@ -56,7 +56,7 @@ func (this *TickController) DealInfo() {
   }
 }
 
-func (this *TickController) DealUpdate() {
+func (this *DealController) DealUpdate() {
   id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
   tick := models.Tick{Id: id}
   err := this.db.Read(&tick)
@@ -81,7 +81,7 @@ func (this *TickController) DealUpdate() {
   }
 }
 
-func (this *TickController) DealDelete() {
+func (this *DealController) DealDelete() {
   id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
   if _, err := this.db.Delete(&models.Deal{Id: id}); err == nil {
     this.Response(SUCCESS, nil)
