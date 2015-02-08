@@ -37,6 +37,21 @@ func (this *baseController) Prepare() {
   }
 }
 
+func (this *baseController) Validate(ob interface{}) map[string]string {
+  valid := validation.Validation{}
+  if ok, err := valid.Valid(ob); !ok {
+    if err != nil {
+      beego.Trace("Validation error: ", err)
+    }
+    inv := make(map[string]string)
+    for _, err := range valid.Errors {
+      inv[err.Key] =  err.Message
+    }
+    return inv
+  }
+  return nil
+}
+
 func (this *baseController) Response(status string, data interface{}) {
   if status == ERROR {
     if err, ok := data.(error); ok {

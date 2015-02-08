@@ -18,16 +18,16 @@ func (u *User) TableName() string {
 }
 
 func (u *User) Valid(v *validation.Validation) {
-    db := orm.NewOrm()
-    if exist := db.QueryTable(u.TableName()).Filter("Login", u.Login).Exist(); exist {
-      // Set error messages of Name by SetError and HasErrors will return true
-      v.SetError("Login", "Login already exists")
+  db := orm.NewOrm()
+  if exist := db.QueryTable(u.TableName()).Filter("Login", u.Login).Exist(); exist {
+    // Set error messages of Name by SetError and HasErrors will return true
+    v.SetError("Login", "Login already exists")
+  }
+  if u.Email != "" {
+    if exist := db.QueryTable(u.TableName()).Filter("Email", u.Email).Exist(); exist {
+      v.SetError("Email", "Email already registered")
     }
-    if u.Email != "" {
-      if exist := db.QueryTable(u.TableName()).Filter("Email", u.Email).Exist(); exist {
-        v.SetError("Email", "Email already registered")
-      }
-    }
+  }
 }
 
 

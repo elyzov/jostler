@@ -5,6 +5,7 @@ import (
   "strconv"
   "encoding/json"
   "jostler/models"
+  "github.com/astaxie/beego"
   "github.com/astaxie/beego/validation"
 )
 
@@ -20,13 +21,8 @@ func (this *UserController) AddUser() {
     this.Response(ERROR, fmt.Sprintf("Incorrect JSON: %v", err))
     return
   }
-  valid := validation.Validation{}
-  if ok, _ := valid.Valid(&user); !ok {
-    inv := make(map[string]string)
-    for _, err := range valid.Errors {
-        inv[err.Key] =  err.Message
-    }
-    this.Response(FAIL, inv)
+  if invalid := this.Validate(&user); invalid != nil {
+    this.Response(FAIL, invalid)
     return
   }
   _, err = this.db.Insert(&user)
@@ -57,9 +53,18 @@ func (this *UserController) UserUpdate() {
   user := models.User{Id: id}
   err := this.db.Read(&user)
   if err != nil {
-    this.Response(ERROR, err)
+    this.Response(FAIL, map[string]interface{}{"id": fmt.Sprintf("User with id %v not found", id)})
+    return
   }
-  json.Unmarshal(this.Ctx.Input.RequestBody, &user)
+  err = json.Unmarshal(this.Ctx.Input.RequestBody, &user)
+  if err != nil {
+    this.Response(ERROR, fmt.Sprintf("Incorrect JSON: %v", err))
+    return
+  }
+  if invalid := this.Validate(&user); invalid != nil {
+    this.Response(FAIL, invalid)
+    return
+  }
   if _, err = this.db.Update(&user); err == nil {
     this.Response(SUCCESS, map[string]interface{}{"user": user})
   } else {
