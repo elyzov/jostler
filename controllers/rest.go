@@ -11,54 +11,61 @@ type restController struct {
 }
 
 func (this *restController) Post() {
-  m := this.model.New()
-  err := json.Unmarshal(this.Ctx.Input.RequestBody, &m)
-  if err != nil {
-    this.Response(ERROR, err)
-    return
-  }
-  _, err = this.model.Add(m)
+
+  // var user models.User
+  // json.Unmarshal(this.Ctx.Input.RequestBody, &user)
+  // this.log.Trace("RequestBody = %v", this.Ctx.Input.RequestBody)
+  // _, err := this.db.Insert(&user)
+  // if err != nil {
+  //   this.Response(ERROR, err)
+  // } else {
+  //   this.Response(SUCCESS, map[string]interface{}{"user": user})
+  // }
+  
+  // this.ServeJson()
+
+  m := this.model.NewModel()
+  json.Unmarshal(this.Ctx.Input.RequestBody, &m)
+  _, err := this.model.AddOne(&m)
   if err != nil {
     this.Response(ERROR, err)
   } else {
-    this.Response(SUCCESS, this.model.Map(models.SINGULAR, &m))
+    this.Response(SUCCESS, this.model.MapOne(&m))
   }
+  this.ServeJson()
 }
 
 func (this *restController) Get() {
   objectId := this.Ctx.Input.Params[":objectId"]
   if objectId != "" {
-    om, err := this.model.FindById(objectId)
+    om, err := this.model.FindOne(objectId)
     if err != nil {
-      this.Response(FAIL, this.model.NotFound(objectId))
+      this.Response(ERROR, err)
     } else {
-      this.Response(SUCCESS, this.model.Map(models.SINGULAR, &om))
+      this.Response(SUCCESS, this.model.MapOne(&om))
     }
   } else {
     oms, _ := this.model.FindAll()
-    this.Response(SUCCESS, this.model.Map(models.PLURAL, &oms))
+    this.Response(SUCCESS, this.model.MapAll(&oms))
   }
+  this.ServeJson()
 }
 
 func (this *restController) Put() {
   objectId := this.Ctx.Input.Params[":objectId"]
-  m, err := this.model.FindById(objectId)
+  m, err := this.model.FindOne(objectId)
   if err != nil {
     this.Response(ERROR, err)
-    return
   }
-  err = json.Unmarshal(this.Ctx.Input.RequestBody, &m)
-  if err != nil {
-    this.Response(ERROR, err)
-    return
-  }
+  json.Unmarshal(this.Ctx.Input.RequestBody, &m)
 
-  err = this.model.Update(m)
+  err = this.model.Update(&m)
   if err != nil {
     this.Response(ERROR, err)
   } else {
-    this.Response(SUCCESS, this.model.Map(models.SINGULAR, &m))
+    this.Response(SUCCESS, this.model.MapOne(&m))
   }
+  this.ServeJson()
 }
 
 func (this *restController) Delete() {
@@ -67,4 +74,5 @@ func (this *restController) Delete() {
   st := SUCCESS
   if err != nil { st = ERROR }
   this.Response(st, err)
+  this.ServeJson()
 }

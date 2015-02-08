@@ -2,9 +2,7 @@ package models
 
 import (
   "strconv"
-  //"errors"
-  // "reflect"
-  // "github.com/astaxie/beego"
+  "github.com/astaxie/beego"
   "github.com/astaxie/beego/orm"
 )
 
@@ -29,33 +27,28 @@ func init() {
   orm.RegisterModel(new(User))
 }
 
-/* Implement Rest Interface */
-func (this *UserModel) New() interface{} {
+func (this *UserModel) NewModel() interface{} {
   return &User{}
 }
 
-func (this *UserModel) Add(ob interface{}) (string, error) {
-  id, err := this.db.Insert(ob)
+func (this *UserModel) AddOne(user interface{}) (string, error) {
+  id, err := this.db.Insert(&user)
   return strconv.FormatInt(id, 10), err
 }
 
-func (this *UserModel) Update(user interface{}) error {
-  _, err := this.db.Update(user)
-  return err
-}
-
-func (this *UserModel) Delete(oid string) error {
-   _, err := this.db.Delete(this.GetModel(oid))
-   return err
-}
-
-func (this *UserModel) FindById(oid string) (interface{}, error) {
-  ob := this.GetModel(oid)
-  err := this.db.Read(ob)
+func (this *UserModel) FindOne(oid string) (interface{}, error) {
+  id, _ := strconv.Atoi(oid)
+  user := User{Id: id}
+  beego.Trace("db = %v", this.db)
+  err := this.db.Read(&user)
   if err != nil {
     return nil, err
   }
-  return ob, nil
+  return user, nil
+}
+
+func (this *UserModel) MapOne(user interface{}) map[string]interface{} {
+  return map[string]interface{}{"user": user}
 }
 
 func (this *UserModel) FindAll() (interface{}, error) {
@@ -67,33 +60,18 @@ func (this *UserModel) FindAll() (interface{}, error) {
   return users, nil
 }
 
-func (this *UserModel) Map(mt int, ob interface{}) map[string]interface{} {
-  return map[string]interface{}{this.Tag(mt): ob}
+func (this *UserModel) MapAll(users interface{}) map[string]interface{} {
+  return map[string]interface{}{"users": users}
 }
 
 
-/* Helper functions */
-func (this *UserModel) GetModel(oid string) interface{} {
+func (this *UserModel) Update(user interface{}) error {
+  _, err := this.db.Update(&user)
+  return err
+}
+
+func (this *UserModel) Delete(oid string) error {
   id, _ := strconv.Atoi(oid)
-  return &User{Id: id}
+   _, err := this.db.Delete(&User{Id: id})
+   return err
 }
-
-func (this *UserModel) Tag(mt int) string {
-  switch mt {
-    case SINGULAR: return "user"
-    case PLURAL  : return "users"
-  }
-  return "unknown"
-}
-
-
-
-
-
-
-
-
-
-
-
-
