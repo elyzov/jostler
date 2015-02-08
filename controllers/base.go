@@ -50,4 +50,5 @@ func (this *baseController) Response(status string, data interface{}) {
       "data"   : data,
     }
   }
+  this.ServeJson()
 }
