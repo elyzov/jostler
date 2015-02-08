@@ -13,7 +13,7 @@ CREATE TABLE tick (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER NOT NULL REFERENCES users (id),
 	title VARCHAR(64) NOT NULL,
-	rest MONEY NOT NULL,
+	rest REAL NOT NULL,
 	created TIMESTAMP,
 	modified TIMESTAMP
 );
@@ -45,7 +45,7 @@ CREATE TABLE deal (
 	tick_id INTEGER NOT NULL REFERENCES tick (id),
 	date_time TIMESTAMP NOT NULL,				-- transaction date/time.
 	cat_id INTEGER NOT NULL REFERENCES cat (id),
-	amount MONEY NOT NULL,
+	amount REAL NOT NULL,
 	cy_id INTEGER NOT NULL REFERENCES cy (id), 	-- currency.
 	comment VARCHAR(128) NOT NULL,
 	aux VARCHAR(16)								-- auxiliary field for different purpose

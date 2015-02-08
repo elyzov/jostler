@@ -19,8 +19,8 @@ func init() {
 
         beego.NSRouter("/users", &controllers.UserController{}, "post:AddUser"),
         beego.NSRouter("/users/:id([0-9]+)", &controllers.UserController{}, "get:UserInfo;put:UserUpdate;delete:UserDelete"),
-        //beego.NSRouter("/users/:userId([0-9]+)/ticks", &controllers.TickController{}, "post:AddTick,get:AllTicks"),
-        //beego.NSRouter("/users/:userId([0-9]+)/ticks/:id([0-9]+)", &controllers.TickController{}, "get:TickInfo,put:TickUpdate,delete:TickDelete"),
+        beego.NSRouter("/ticks", &controllers.TickController{}, "post:AddTick;get:AllTicks"),
+        beego.NSRouter("/ticks/:id([0-9]+)", &controllers.TickController{}, "get:TickInfo;put:TickUpdate;delete:TickDelete"),
     )
     beego.AddNamespace(api)
 }

@@ -4,6 +4,7 @@ import (
   "jostler/models"
   "github.com/astaxie/beego"
   "github.com/astaxie/beego/orm"
+  "github.com/astaxie/beego/validation"
 )
 
 const (
@@ -19,7 +20,7 @@ type NestPreparer interface {
 type baseController struct {
   beego.Controller
 //  i18n.Locale
-  user    models.User
+  user    *models.User
   isLogin bool
   db      orm.Ormer
 
@@ -31,6 +32,8 @@ func (this *baseController) Prepare() {
   // page start time
 //  this.Data["PageStartTime"] = time.Now()
   this.db = orm.NewOrm()
+  this.user = &models.User{Id : 1}
+  this.db.Read(this.user)
 
   if app, ok := this.AppController.(NestPreparer); ok {
     app.NestPrepare()
