@@ -21,6 +21,7 @@ func init() {
         beego.NSRouter("/users/:id([0-9]+)", &controllers.UserController{}, "get:UserInfo;put:UserUpdate;delete:UserDelete"),
         beego.NSRouter("/ticks", &controllers.TickController{}, "post:AddTick;get:AllTicks"),
         beego.NSRouter("/ticks/:id([0-9]+)", &controllers.TickController{}, "get:TickInfo;put:TickUpdate;delete:TickDelete"),
+        beego.NSRouter("/ticks/:tock_id([0-9]+)/deals", &controllers.DealController{}, "post:AddDeal;get:AllDeals"),
     )
     beego.AddNamespace(api)
 }
