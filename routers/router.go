@@ -14,7 +14,6 @@ import (
 
 func init() {
     beego.Router("/", &controllers.MainController{})
-    //beego.RESTRouter("/users", &controllers.UserController{})
 	api := beego.NewNamespace("/api/v1/",
 		beego.NSAutoRouter(&controllers.AuthController{}),
 

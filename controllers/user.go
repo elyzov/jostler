@@ -1,9 +1,11 @@
 package controllers
 
 import (
+  "fmt"
   "strconv"
   "encoding/json"
   "jostler/models"
+  "github.com/astaxie/beego/validation"
 )
 
 
@@ -11,35 +13,43 @@ type UserController struct {
   baseController
 }
 
-func (this *UserController) NestPrepare() {
-  // this.model = &models.UserModel{}
-  // this.model.Prepare()
-}
-
-
 func (this *UserController) AddUser() {
   var user models.User
-  json.Unmarshal(this.Ctx.Input.RequestBody, &user)
-  _, err := this.db.Insert(&user)
+  err := json.Unmarshal(this.Ctx.Input.RequestBody, &user)
+  if err != nil {
+    this.Response(ERROR, fmt.Sprintf("Incorrect JSON: %v", err))
+    return
+  }
+  valid := validation.Validation{}
+  if ok, _ := valid.Valid(&user); !ok {
+    inv := make(map[string]string)
+    for _, err := range valid.Errors {
+        inv[err.Key] =  err.Message
+    }
+    this.Response(FAIL, inv)
+    return
+  }
+  _, err = this.db.Insert(&user)
   if err != nil {
     this.Response(ERROR, err)
   } else {
     this.Response(SUCCESS, map[string]interface{}{"user": user})
   }
-  
-  this.ServeJson()
 }
 
 func (this *UserController) UserInfo() {
-  id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
-  user := models.User{Id: id}
-  err := this.db.Read(&user)
+  id, err := strconv.Atoi(this.Ctx.Input.Param(":id"))
   if err != nil {
-    this.Response(ERROR, err)
+    this.Response(FAIL, map[string]interface{}{"id": "Must be an integer"})
+    return
+  }
+  user := models.User{Id: id}
+  err = this.db.Read(&user)
+  if err != nil {
+    this.Response(FAIL, map[string]interface{}{"id": fmt.Sprintf("User with id %v not found", id)})
   } else {
     this.Response(SUCCESS, map[string]interface{}{"user": user})
   }
-  this.ServeJson()
 }
 
 func (this *UserController) UserUpdate() {
@@ -55,8 +65,6 @@ func (this *UserController) UserUpdate() {
   } else {
     this.Response(ERROR, err)
   }
-  
-  this.ServeJson()
 }
 
 func (this *UserController) UserDelete() {
@@ -66,5 +74,4 @@ func (this *UserController) UserDelete() {
   } else {
     this.Response(ERROR, err)
   }
-  this.ServeJson()
 }

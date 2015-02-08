@@ -25,6 +25,8 @@ type baseController struct {
 
 }
 
+type JsonMap map[string]interface{}
+
 func (this *baseController) Prepare() {
   // page start time
 //  this.Data["PageStartTime"] = time.Now()
@@ -50,4 +52,5 @@ func (this *baseController) Response(status string, data interface{}) {
       "data"   : data,
     }
   }
+  this.ServeJson()
 }
