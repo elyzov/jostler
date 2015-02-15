@@ -1,151 +1,259 @@
 {
   "title": "Jostler",
-  "id": 1,
-  "formatVersion": 2,
   "ideas": {
-    "1": {
-      "title": "Ticks",
-      "id": 2,
+    "2": {
+      "title": "Settings",
+      "ideas": {
+        "1": {
+          "title": "Categories",
+          "id": 9
+        },
+        "2": {
+          "title": "Tags",
+          "id": 10
+        },
+        "3": {
+          "title": "Profile",
+          "id": 11
+        },
+        "4": {
+          "title": "Currency",
+          "id": 12
+        },
+        "5": {
+          "title": "Contractors",
+          "id": 13
+        }
+      },
+      "id": 8,
       "attr": {
         "position": [
-          81,
-          -54,
-          1
+          89,
+          -302,
+          3
+        ],
+        "style": {}
+      }
+    },
+    "3": {
+      "title": "Budget",
+      "id": 14,
+      "attr": {
+        "position": [
+          162,
+          -28,
+          4
+        ],
+        "style": {}
+      }
+    },
+    "4": {
+      "title": "Ticks",
+      "ideas": {
+        "1": {
+          "title": "Groups",
+          "id": 16,
+          "ideas": {
+            "1": {
+              "title": "Tick",
+              "id": 37,
+              "ideas": {
+                "1": {
+                  "title": "New Deal",
+                  "id": 43,
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "2": {
+                  "title": "Change rest",
+                  "id": 44
+                },
+                "3": {
+                  "title": "Export/Import",
+                  "id": 45
+                },
+                "4": {
+                  "title": "Settings",
+                  "id": 46
+                },
+                "5": {
+                  "title": "View",
+                  "id": 47
+                }
+              }
+            }
+          }
+        },
+        "2": {
+          "title": "Actions",
+          "id": 31,
+          "ideas": {
+            "1": {
+              "title": "New Tick",
+              "id": 32
+            },
+            "2": {
+              "title": "Views",
+              "id": 34
+            },
+            "3": {
+              "title": "New Group",
+              "id": 36
+            },
+            "4": {
+              "title": "Delete Tick",
+              "id": 40
+            },
+            "5": {
+              "title": "Delete Group",
+              "id": 41
+            }
+          }
+        },
+        "3": {
+          "title": "Capital",
+          "id": 39
+        },
+        "4": {
+          "title": "Statistics",
+          "id": 48
+        }
+      },
+      "id": 15
+    },
+    "5": {
+      "title": "Reports",
+      "id": 17,
+      "attr": {
+        "position": [
+          121,
+          249,
+          5
         ],
         "style": {}
       },
       "ideas": {
         "1": {
           "title": "Groups",
-          "id": 20
-        }
-      }
-    },
-    "2": {
-      "title": "Reports",
-      "id": 6
-    },
-    "3": {
-      "title": "Dashboard",
-      "id": 21,
-      "ideas": {
-        "1": {
-          "title": "Statistics",
-          "id": 22,
-          "ideas": {
-            "1": {
-              "title": "Top",
-              "id": 27,
-              "ideas": {}
-            },
-            "2": {
-              "title": "Comparing",
-              "id": 30
-            },
-            "3": {
-              "title": "Tag Cloud",
-              "id": 31,
-              "ideas": {}
-            },
-            "4": {
-              "title": "Capital",
-              "id": 33
-            }
-          }
+          "id": 49
         },
         "2": {
-          "title": "Events",
-          "id": 23
-        },
-        "3": {
-          "title": "Month's Budget",
-          "id": 24
-        },
-        "4": {
-          "title": "Widgets",
-          "id": 25
-        },
-        "5": {
-          "title": "Actions",
-          "id": 34,
-          "ideas": {
-            "1": {
-              "title": "New Deal",
-              "id": 36
-            },
-            "2": {
-              "title": "Sync",
-              "id": 38
-            },
-            "3": {
-              "title": "View",
-              "id": 40
-            }
-          }
-        }
-      }
-    },
-    "-1": {
-      "title": "Budget",
-      "id": 4,
-      "ideas": {}
-    },
-    "-2": {
-      "title": "Settings",
-      "id": 7,
-      "ideas": {
-        "1": {
-          "title": "Categories",
-          "id": 8
-        },
-        "2": {
-          "title": "Tags",
-          "id": 9
-        },
-        "3": {
-          "title": "Profile",
-          "id": 10
-        },
-        "4": {
-          "title": "Currency",
-          "id": 17,
+          "title": "New Report",
+          "id": 50,
           "ideas": {}
         },
-        "5": {
-          "title": "Contractors",
-          "id": 19
+        "3": {
+          "title": "Delete Report",
+          "id": 52
         }
       }
     },
-    "-3": {
+    "-10": {
       "title": "Tools",
-      "id": 12,
       "ideas": {
         "1": {
           "title": "Credits",
-          "id": 13
+          "id": 3
         },
         "2": {
           "title": "Havings",
-          "id": 11,
-          "attr": {
-            "style": {}
-          }
+          "id": 4
         },
         "3": {
           "title": "Investments",
-          "id": 14
+          "id": 5
         },
         "4": {
           "title": "Cash Flows",
-          "id": 15
+          "id": 6
         },
         "5": {
           "title": "Golas",
-          "id": 16
+          "id": 7
         }
+      },
+      "id": 2,
+      "attr": {
+        "position": [
+          299,
+          -361,
+          1
+        ],
+        "style": {}
       }
+    },
+    "-20": {
+      "title": "Dashboard",
+      "ideas": {
+        "1": {
+          "title": "Statistics",
+          "ideas": {
+            "1": {
+              "title": "Top",
+              "id": 20
+            },
+            "2": {
+              "title": "Comparing",
+              "id": 21
+            },
+            "3": {
+              "title": "Tag Cloud",
+              "id": 22
+            },
+            "4": {
+              "title": "Capital",
+              "id": 23
+            }
+          },
+          "id": 19
+        },
+        "2": {
+          "title": "Events",
+          "id": 24
+        },
+        "3": {
+          "title": "Month's Budget",
+          "id": 25
+        },
+        "4": {
+          "title": "Widgets",
+          "id": 26
+        },
+        "5": {
+          "title": "Actions",
+          "ideas": {
+            "1": {
+              "title": "New Deal",
+              "id": 28
+            },
+            "2": {
+              "title": "Sync",
+              "id": 29
+            },
+            "3": {
+              "title": "View",
+              "id": 30
+            }
+          },
+          "id": 27
+        }
+      },
+      "id": 18,
+      "attr": {
+        "position": [
+          311,
+          240,
+          2
+        ],
+        "style": {}
+      }
+    },
+    "-21": {
+      "title": "Users",
+      "id": 53
     }
   },
-  "links": []
+  "formatVersion": 2,
+  "id": 1
 }
