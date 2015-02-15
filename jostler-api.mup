@@ -32,7 +32,24 @@
             "1": {
               "title": ":group_id",
               "id": 15,
-              "ideas": {}
+              "ideas": {
+                "1": {
+                  "title": "edit",
+                  "id": 26
+                },
+                "2": {
+                  "title": "delete",
+                  "id": 29
+                }
+              }
+            },
+            "2": {
+              "title": "add",
+              "id": 25
+            },
+            "3": {
+              "title": "edit",
+              "id": 34
             }
           }
         },
@@ -46,9 +63,38 @@
               "ideas": {
                 "1": {
                   "title": ":deal_id",
-                  "id": 21
+                  "id": 21,
+                  "ideas": {
+                    "2": {
+                      "title": "edit",
+                      "id": 23
+                    },
+                    "3": {
+                      "title": "delete",
+                      "id": 30
+                    }
+                  }
+                },
+                "2": {
+                  "title": "add",
+                  "id": 22,
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "3": {
+                  "title": "edit",
+                  "id": 33
                 }
               }
+            },
+            "2": {
+              "title": "edit",
+              "id": 24
+            },
+            "3": {
+              "title": "delete",
+              "id": 31
             }
           }
         },
@@ -59,6 +105,14 @@
         "4": {
           "title": "import",
           "id": 19
+        },
+        "5": {
+          "title": "add",
+          "id": 27
+        },
+        "6": {
+          "title": "edit",
+          "id": 32
         }
       }
     },
@@ -66,17 +120,164 @@
       "title": "auth",
       "id": 10
     },
+    "13": {
+      "title": "statistics",
+      "id": 28
+    },
+    "14": {
+      "title": "cys",
+      "id": 47
+    },
+    "15": {
+      "title": "contractors",
+      "id": 48,
+      "ideas": {
+        "1": {
+          "title": ":contractor_id",
+          "id": 49,
+          "ideas": {
+            "1": {
+              "title": "edit",
+              "id": 52
+            },
+            "2": {
+              "title": "delete",
+              "id": 53
+            }
+          }
+        },
+        "2": {
+          "title": "add",
+          "id": 50,
+          "ideas": {}
+        }
+      }
+    },
+    "16": {
+      "title": "dashboard",
+      "id": 55,
+      "ideas": {
+        "1": {
+          "title": "edit",
+          "id": 56
+        },
+        "2": {
+          "title": "widgets",
+          "id": 57
+        }
+      }
+    },
     "-1": {
       "title": "budget",
       "id": 5
     },
     "-2": {
       "title": "tools",
-      "id": 6
+      "id": 6,
+      "ideas": {
+        "1": {
+          "title": "credits",
+          "id": 58
+        },
+        "2": {
+          "title": "havings",
+          "id": 59
+        },
+        "3": {
+          "title": "investments",
+          "id": 60
+        },
+        "4": {
+          "title": "cashflow",
+          "id": 61
+        },
+        "5": {
+          "title": "goals",
+          "id": 62
+        }
+      }
     },
     "-1.5": {
       "title": "reports",
-      "id": 8
+      "id": 8,
+      "ideas": {
+        "1": {
+          "title": "groups",
+          "id": 63,
+          "ideas": {
+            "1": {
+              "title": ":group_id",
+              "id": 64
+            }
+          }
+        },
+        "2": {
+          "title": ":report_id",
+          "id": 65
+        }
+      }
+    },
+    "-3": {
+      "title": "categories",
+      "id": 35,
+      "ideas": {
+        "1": {
+          "title": ":category_id",
+          "id": 36,
+          "ideas": {
+            "1": {
+              "title": "edit",
+              "id": 38
+            },
+            "2": {
+              "title": "delete",
+              "id": 39
+            }
+          }
+        },
+        "2": {
+          "title": "add",
+          "id": 37
+        }
+      }
+    },
+    "-13": {
+      "title": "tags",
+      "id": 40,
+      "ideas": {
+        "1": {
+          "title": ":tag_id",
+          "id": 41,
+          "ideas": {
+            "1": {
+              "title": "edit",
+              "id": 44,
+              "ideas": {}
+            },
+            "2": {
+              "title": "delete",
+              "id": 46
+            }
+          }
+        },
+        "2": {
+          "title": "add",
+          "id": 42,
+          "ideas": {}
+        }
+      },
+      "attr": {
+        "position": [
+          163.5,
+          233,
+          1
+        ],
+        "style": {}
+      }
+    },
+    "-14": {
+      "title": "sync",
+      "id": 54
     }
   },
   "links": []
