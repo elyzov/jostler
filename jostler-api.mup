@@ -1,0 +1,83 @@
+{
+  "title": "Jostler API",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "1": {
+      "title": "users",
+      "id": 2,
+      "ideas": {
+        "1": {
+          "title": "add",
+          "id": 11
+        },
+        "2": {
+          "title": "delete",
+          "id": 12
+        },
+        "3": {
+          "title": "edit",
+          "id": 13
+        }
+      }
+    },
+    "11": {
+      "title": "ticks",
+      "id": 4,
+      "ideas": {
+        "1": {
+          "title": "groups",
+          "id": 14,
+          "ideas": {
+            "1": {
+              "title": ":group_id",
+              "id": 15,
+              "ideas": {}
+            }
+          }
+        },
+        "2": {
+          "title": ":tick_id",
+          "id": 17,
+          "ideas": {
+            "1": {
+              "title": "deals",
+              "id": 20,
+              "ideas": {
+                "1": {
+                  "title": ":deal_id",
+                  "id": 21
+                }
+              }
+            }
+          }
+        },
+        "3": {
+          "title": "export",
+          "id": 18
+        },
+        "4": {
+          "title": "import",
+          "id": 19
+        }
+      }
+    },
+    "12": {
+      "title": "auth",
+      "id": 10
+    },
+    "-1": {
+      "title": "budget",
+      "id": 5
+    },
+    "-2": {
+      "title": "tools",
+      "id": 6
+    },
+    "-1.5": {
+      "title": "reports",
+      "id": 8
+    }
+  },
+  "links": []
+}
